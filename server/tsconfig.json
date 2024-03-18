@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "typeRoots": ["node_modules/@types"],
+    "target": "ESNext",
+    "jsx": "preserve",
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules"]
+}
