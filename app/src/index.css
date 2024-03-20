@@ -1,3 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.text-wrap-balance {
+  text-wrap: balance;
+}
+
+:root {
+  --font-family-sans: "Klee One", sans-serif;
+}
+
+/** Make the stroke dasharray animate really slowly **/
+.react-flow__edge {
+  animation: dash 10s linear infinite;
+  stroke-dashoffset: 100;
+  stroke-dasharray: 100;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

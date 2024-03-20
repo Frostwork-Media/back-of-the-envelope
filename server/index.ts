@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { initTRPC } from "@trpc/server";
 import { config } from "dotenv";
+import { altDocs, documentation } from "./src/squiggle-docs";
+import { prompt } from "./src/prompt";
 
 config({
   path: ".env.local",
@@ -25,6 +27,17 @@ export const appRouter = router({
       return {
         greeting: `Hello, ${opts.input.text}!`,
       };
+    }),
+  createForecast: procedure
+    .input(z.object({ text: z.string(), squiggle: z.string() }))
+    .mutation(async (opts) => {
+      const content = altDocs(opts.input.text);
+      const shape = z.object({
+        js: z.string(),
+      });
+      const result = await prompt(content, shape, false);
+
+      return result;
     }),
 });
 
