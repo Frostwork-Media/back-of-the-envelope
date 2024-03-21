@@ -19,9 +19,9 @@ export const CustomNode = memo(function CustomNode({
       <Handle
         type="target"
         position={Position.Left}
-        className="-translate-x-1/2 translate-y-0 opacity-0"
+        className="!-translate-y-1/2 !translate-x-0 opacity-0"
       />
-      <div className="border-brand-500 from-brand-500 to-brand-600 grid w-[240px] overflow-hidden rounded-lg bg-gradient-to-r p-px text-white">
+      <div className="from-brand-400 to-brand-500 grid w-[240px] overflow-hidden rounded-lg bg-gradient-to-r p-px text-white">
         <div className="grid gap-4 rounded-t-lg bg-neutral-800 p-4 pt-3">
           <div className="grid gap-1">
             <h2 className="text-wrap-balance text-base leading-tight">
@@ -44,7 +44,7 @@ export const CustomNode = memo(function CustomNode({
       <Handle
         type="source"
         position={Position.Right}
-        className="-translate-x-1/2 translate-y-0 opacity-0"
+        className="!-translate-y-1/2 !translate-x-0 opacity-0"
       />
     </>
   );

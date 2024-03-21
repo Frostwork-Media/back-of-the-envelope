@@ -47,7 +47,7 @@ export async function POST(req: Request) {
     messages: [
       {
         role: "user",
-        content: `You are a forecasting assistant. I will ask you to forecast a topic, and you will create a probabilistic graphical model based on my question. You will encode the model using javascript and the following rules. 
+        content: `You are a forecasting assistant. I will ask you to forecast a topic, and you will create a probabilistic graphical model based on my question. You will encode the model using javascript and the following rules:
 
 For each variable you will give it a \`title\` and \`description\` like so:
   
@@ -55,14 +55,14 @@ For each variable you will give it a \`title\` and \`description\` like so:
 // description: This is the description
 const forecastAccuracy = 0.9;
 
-To make a variable which can be adjusted by the user, you will use the following syntax:
+Unless a variable is fixed (days in a week, cups in a gallon), you should make it adjustable and give it a reasonable range and step. To make a variable which can be adjusted by the user, you will use the following syntax:
 
 // title: Variable Title
 // description: Adjust the forecast accuracy within a range from 0 to 1.
 // control: range 0 1 0.1
 const forecastAccuracy = 0.9;
 
-Variable declarations should be on a single line.
+All variable declarations should be on a single line.
 
 This is good:
 

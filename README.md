@@ -1,12 +1,12 @@
 - Add voice chat so that it can be used more or less on the go
 - make it so that we auto zoom only when number of nodes changes, with delay, and it should run the graph layout algorithm, and then fitZoom...
-- do a proper ux, again with on the go in mind, code overlay i think
 - maybe move it into a realtime situation
 - a nicer slider
 - including updating existing code in prompt
 - what if you rotated each element a tiny bit for a cute effect
 - use current screen aspect ratio when running layout
-
+- add a loading state
+- eventually move ai stuff behind protected procedures
 
 - How are we testing a particular instance of our final distribution, like inputs to our function. There has to be a way. That's more or less the missing piece.
 
@@ -20,8 +20,6 @@ Assuming people can just edit the code.
 
 ## Examples
 
-- "Estimate the daily revenue based on foot traffic and advertising effectiveness"
-- "Estimate the number of people who will attend a concert based on ticket sales and social media mentions"
 - "If I hit the gym 3 times a week and burn around 500 calories each time, how many calories am I torching in a month?"
 - "Say the interest rate on my savings account is 1.5% annually, what's the likely return on a deposit of 10,000 bucks after a year?"
 - "We're planning a road trip, right? Our car gets about 30 miles per gallon, so how much gas will we need for a 600-mile round trip?"

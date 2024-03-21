@@ -7,6 +7,7 @@ import {
   type NodeTypes,
   ReactFlowProvider,
   Panel,
+  BackgroundVariant,
 } from "@xyflow/react";
 import { CustomNode } from "./CustomNode";
 import { Chat } from "./Chat";
@@ -46,7 +47,12 @@ function BoardInner() {
         //   }
         // }}
       >
-        <Background size={1} gap={12} color="#55515f" />
+        <Background
+          size={1}
+          gap={16}
+          color="#74707c"
+          variant={BackgroundVariant.Dots}
+        />
         <Panel
           position="top-center"
           className="!mx-0 !my-2 grid w-full max-w-sm overflow-hidden rounded-full border border-neutral-700 bg-neutral-900 shadow shadow-[black] md:max-w-lg"

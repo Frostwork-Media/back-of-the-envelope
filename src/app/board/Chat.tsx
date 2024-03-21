@@ -1,17 +1,25 @@
 "use client";
 
 import { useChat } from "ai/react";
-import { Microphone2, Send2 } from "iconsax-react";
-import { useEffect } from "react";
+import { Send2 } from "iconsax-react";
+import { useCallback, useEffect } from "react";
 import { fixToolCallJson } from "~/lib/fixToolCallJson";
 import { usePersistedStore, useSetJs } from "~/lib/usePersistedStore";
 import { NavIconButton } from "./NavIconButton";
+import { RecordButton } from "./RecordButton";
 
 export function Chat() {
   const js = usePersistedStore((state) => state.code);
   const setJs = useSetJs();
-  const { messages, input, handleInputChange, handleSubmit, isLoading } =
-    useChat();
+  const {
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    isLoading,
+    setMessages,
+    reload,
+  } = useChat();
 
   let currentJs = js;
 
@@ -39,16 +47,26 @@ export function Chat() {
     }
   }, [currentJs, js, setJs]);
 
+  const submitRecording = useCallback(
+    (text: string) => {
+      setMessages([
+        {
+          id: "1",
+          role: "user",
+          content: text,
+        },
+      ]);
+      reload().catch(console.error);
+    },
+    [reload, setMessages],
+  );
+
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-grow items-center bg-transparent px-1"
+      className="flex flex-grow gap-1 bg-transparent p-1"
     >
-      <NavIconButton
-        icon={Microphone2}
-        hoverClass="hover:text-yellow-500"
-        type="button"
-      />
+      <RecordButton submitRecording={submitRecording} />
       <input
         className="w-full rounded-md bg-white/5 p-3 outline-none"
         value={input}
@@ -66,7 +84,7 @@ export function Chat() {
           }
         }}
       />
-      <NavIconButton type="submit" icon={Send2} hoverClass="hover:text-brand" />
+      <NavIconButton type="submit" icon={Send2} className="hover:text-brand" />
     </form>
   );
 }

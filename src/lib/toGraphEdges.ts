@@ -8,9 +8,8 @@ export function toGraphEdges(graph: Graph): Edge[] {
     target: edge.target,
     className: "animated-edge",
     style: {
-      stroke: "#8b68ee",
+      stroke: "#a892f7",
       strokeWidth: 1,
-      // strokeDasharray: "5,5"
     },
   }));
 }

@@ -1,5 +1,6 @@
 "use client";
 import type { Send2 } from "iconsax-react";
+import { cn } from "~/lib/cn";
 
 type NavIconButtonProps = {
   icon: typeof Send2;
@@ -8,12 +9,15 @@ type NavIconButtonProps = {
 
 export function NavIconButton({
   icon: Icon,
-  hoverClass = "hover:text-brand",
+  className = "hover:text-brand",
   ...props
-}: NavIconButtonProps & Omit<React.ComponentProps<"button">, "className">) {
+}: NavIconButtonProps & React.ComponentProps<"button">) {
   return (
     <button
-      className={`flex h-16 w-16 shrink-0 items-center justify-center text-white/70 ${hoverClass}`}
+      className={cn(
+        `flex h-14 w-14 shrink-0 items-center justify-center rounded-full text-white/70`,
+        className,
+      )}
       {...props}
     >
       <Icon className="h-7 w-7 transition-colors" />

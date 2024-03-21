@@ -20,11 +20,11 @@
 } */
 
 body {
-  @apply text-background bg-neutral-800 antialiased;
+  @apply bg-[#363141] text-background antialiased;
 }
 
 .react-flow__node {
-  @apply shadow-lg shadow-[black];
+  filter: drop-shadow(0 4px 6px #0004);
 }
 
 .custom-numbers {
