@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import OpenAI from "openai";
-import { OpenAIStream, StreamingTextResponse, type Message } from "ai";
+import { OpenAIStream, StreamingTextResponse } from "ai";
 import zodToJsonSchema from "zod-to-json-schema";
 import { z } from "zod";
 import type { ChatCompletionMessage } from "openai/resources/index.mjs";

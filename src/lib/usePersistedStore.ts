@@ -20,7 +20,7 @@ type PersistedStore = {
 export const usePersistedStore = create<PersistedStore>()(
   subscribeWithSelector(
     persist(
-      (set) => ({
+      (_set) => ({
         text: "",
         code: "",
         nodes: [],

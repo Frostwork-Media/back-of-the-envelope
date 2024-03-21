@@ -23,7 +23,7 @@ export default async function handler(
   const form = new IncomingForm();
 
   const transcription = await new Promise<string>((resolve, reject) => {
-    form.parse(req, (err, fields, files) => {
+    form.parse(req, (err, _fields, files) => {
       if (err) return reject(err);
 
       if (!files.audio) {

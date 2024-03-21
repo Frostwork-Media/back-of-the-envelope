@@ -1,6 +1,5 @@
 import { parse } from "acorn";
 import { simple } from "acorn-walk";
-import { usePersistedStore } from "./usePersistedStore";
 
 export type GraphNode = {
   varName: string;
