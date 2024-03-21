@@ -1,3 +1,4 @@
+# TO DO
 - add a loading state
   - current boxes greyed out
   - a spinner somewhere
@@ -7,18 +8,13 @@
 - maybe move it into a realtime situation
 - eventually move ai stuff behind protected procedures
 - including updating existing code in prompt
+- experiment with adding array[] and rendering with line graph / bar graph
+- prefix/suffix for better display
+- is market lookup possible? what would it look like in code
 
-- How are we testing a particular instance of our final distribution, like inputs to our function. There has to be a way. That's more or less the missing piece.
+---
 
-- finally i think we would also look up markets, and find an easy way to integrate those markets (or other API's) into the app. we could enable user API's as well. And allow people to write their own API's connected to their own proprietary data.
-
-And this is "The right version of estimaker" imo
-
-Assuming people can just edit the code.
-
-===
-
-## Examples
+## Random Examples
 
 - "If I hit the gym 3 times a week and burn around 500 calories each time, how many calories am I torching in a month?"
 - "Say the interest rate on my savings account is 1.5% annually, what's the likely return on a deposit of 10,000 bucks after a year?"
