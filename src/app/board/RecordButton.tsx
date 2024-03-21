@@ -1,5 +1,3 @@
-"use client";
-
 import { Microphone2 } from "iconsax-react";
 import { NavIconButton } from "./NavIconButton";
 import { useCallback, useEffect, useRef, useState } from "react";

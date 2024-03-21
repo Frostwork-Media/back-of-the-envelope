@@ -19,9 +19,9 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "mini forecast",
+  title: "Mini Forecast",
   description: "A tiny forecasting tool",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/favicon.svg" }],
 };
 
 export default function RootLayout({

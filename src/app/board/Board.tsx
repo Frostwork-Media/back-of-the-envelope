@@ -12,6 +12,7 @@ import {
 import { CustomNode } from "./CustomNode";
 import { Chat } from "./Chat";
 import { CodePanel } from "./CodePanel";
+import Image from "next/image";
 
 const nodeTypes: NodeTypes = {
   custom: CustomNode,
@@ -63,6 +64,13 @@ function BoardInner() {
         </Panel>
       </ReactFlow>
       <CodePanel />
+      <Image
+        src="/logo.svg"
+        alt="logo"
+        width={32}
+        height={32}
+        className="absolute left-4 top-4"
+      />
     </div>
   );
 }

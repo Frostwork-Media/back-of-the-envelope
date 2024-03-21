@@ -7,7 +7,7 @@ export function CodePanel() {
     <div className="bg-red pointer-events-none absolute bottom-0 left-0 right-0 top-0">
       <PanelGroup direction="vertical">
         <Panel defaultSize={100} />
-        <PanelResizeHandle className="pointer-events-auto flex items-center justify-start gap-2 bg-gradient-to-b from-neutral-500/0 to-brand-900/20 p-3 transition-colors">
+        <PanelResizeHandle className="pointer-events-auto flex items-center justify-start gap-2 bg-gradient-to-b from-neutral-500/0 to-neutral-800/20 p-3 transition-colors">
           <Code1 className="h-5 w-5" />
           <span className="text-sm font-bold">Show Code</span>
           <ArrowUp2 className="h-5 w-5" />
