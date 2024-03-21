@@ -1,7 +1,4 @@
 # TO DO
-- add a loading state
-  - current boxes greyed out
-  - a spinner somewhere
 - a nicer slider
 - make it so that we auto zoom only when number of nodes changes, with delay, and it should run the graph layout algorithm, and then fitZoom...
   - use current screen aspect ratio when running layout

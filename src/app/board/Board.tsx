@@ -23,7 +23,7 @@ function BoardInner() {
   const edges = usePersistedStore((state) => state.edges);
 
   return (
-    <div className="grid h-screen">
+    <div className="grid h-[100dvh]">
       <ReactFlow
         nodeTypes={nodeTypes}
         nodes={nodes}
@@ -69,7 +69,7 @@ function BoardInner() {
         alt="logo"
         width={32}
         height={32}
-        className="absolute left-4 top-4"
+        className="absolute left-4 top-4 hidden sm:block"
       />
     </div>
   );
