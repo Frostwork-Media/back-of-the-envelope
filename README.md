@@ -1,12 +1,12 @@
-- Add voice chat so that it can be used more or less on the go
-- make it so that we auto zoom only when number of nodes changes, with delay, and it should run the graph layout algorithm, and then fitZoom...
-- maybe move it into a realtime situation
-- a nicer slider
-- including updating existing code in prompt
-- what if you rotated each element a tiny bit for a cute effect
-- use current screen aspect ratio when running layout
 - add a loading state
+  - current boxes greyed out
+  - a spinner somewhere
+- a nicer slider
+- make it so that we auto zoom only when number of nodes changes, with delay, and it should run the graph layout algorithm, and then fitZoom...
+  - use current screen aspect ratio when running layout
+- maybe move it into a realtime situation
 - eventually move ai stuff behind protected procedures
+- including updating existing code in prompt
 
 - How are we testing a particular instance of our final distribution, like inputs to our function. There has to be a way. That's more or less the missing piece.
 
