@@ -18,3 +18,17 @@
     stroke-dashoffset: 0;
   }
 }
+
+body {
+  @apply text-background bg-neutral-800 antialiased;
+}
+
+.react-flow__node {
+  @apply shadow-lg shadow-[black];
+}
+
+.custom-numbers {
+  text-shadow:
+    0 0 0 #000,
+    0 0 4px #0004;
+}

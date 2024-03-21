@@ -21,13 +21,13 @@ export const CustomNode = memo(function CustomNode({
         position={Position.Left}
         className="-translate-x-1/2 translate-y-0 opacity-0"
       />
-      <div className="grid w-[240px] overflow-hidden rounded-lg border border-black bg-black text-white">
-        <div className="grid gap-4 bg-white p-4 pt-3 font-semibold">
+      <div className="border-brand-500 from-brand-400 to-brand grid w-[240px] overflow-hidden rounded-lg bg-gradient-to-r p-px text-white">
+        <div className="grid gap-4 rounded-t-lg bg-neutral-800 p-4 pt-3">
           <div className="grid gap-1">
-            <h2 className="text-wrap-balance text-base font-semibold leading-tight text-gray-800">
+            <h2 className="text-wrap-balance text-base leading-tight">
               {data.label}
             </h2>
-            <p className="text-xs leading-tight text-black/50">
+            <p className="text-xs leading-tight text-white/50">
               {data.description}
             </p>
           </div>
@@ -84,7 +84,7 @@ function HandleControl({
 function DisplayVariableValue({ varName }: { varName: string }) {
   const value = usePersistedStore((state) => state.values[varName] ?? "???");
   return (
-    <div className="overflow-hidden text-ellipsis bg-black p-2 text-center text-lg font-semibold tabular-nums text-white">
+    <div className="custom-numbers overflow-hidden text-ellipsis p-2 text-center font-mono font-bold tabular-nums text-white">
       {Number(Number(value).toPrecision(5)).toString()}
     </div>
   );

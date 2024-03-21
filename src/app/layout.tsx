@@ -1,6 +1,6 @@
 import "~/styles/globals.css";
 
-import { Klee_One } from "next/font/google";
+import { Klee_One, Inter } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
 
@@ -9,6 +9,12 @@ import "@xyflow/react/dist/style.css";
 const kleeOne = Klee_One({
   subsets: ["latin"],
   weight: ["400", "600"],
+  variable: "--font-serif",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "700"],
   variable: "--font-sans",
 });
 
@@ -25,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${kleeOne.variable}`}>
+      <body className={`font-sans ${kleeOne.variable} ${inter.variable}`}>
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>

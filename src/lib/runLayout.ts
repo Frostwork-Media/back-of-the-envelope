@@ -6,12 +6,7 @@ import dagre from "dagre";
 /**
  * Given nodes and edges, uses dagre to determine the positions
  */
-export async function addPositionsToNodes(
-  nodes: Node[],
-  edges: Edge[],
-): Promise<Node[]> {
-  // const currentNodes = usePersistedStore.getState().nodes;
-
+export async function runLayout(nodes: Node[], edges: Edge[]): Promise<Node[]> {
   const g = new dagre.graphlib.Graph();
   g.setGraph({ rankdir: "LR" });
   g.setDefaultEdgeLabel(() => ({}));
@@ -36,18 +31,4 @@ export async function addPositionsToNodes(
       },
     };
   });
-
-  // return nodes.map((node) => {
-  //   const currentNode = currentNodes.find((n) => n.id === node.id);
-  //   const pos = g.node(node.id);
-  //   return {
-  //     ...node,
-  //     position: currentNode
-  //       ? currentNode.position
-  //       : {
-  //           x: pos.x - pos.width / 2,
-  //           y: pos.y - pos.height / 2,
-  //         },
-  //   };
-  // });
 }

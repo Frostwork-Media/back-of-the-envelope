@@ -5,7 +5,7 @@ import { useReactFlow } from "@xyflow/react";
 import { useCallback, useRef } from "react";
 import { codeToGraph } from "./codeToGraph";
 import { extractCommentData, mergeCommentData } from "./comments";
-import { addPositionsToNodes } from "./addPositionsToNodes";
+import { runLayout } from "./runLayout";
 import Task from "./Task";
 import { toGraphEdges } from "./toGraphEdges";
 
@@ -49,7 +49,7 @@ export function useSetJs() {
         const nodesWithCommentData = mergeCommentData(comments, graph);
         const edges = toGraphEdges(graph);
 
-        const nodes = await addPositionsToNodes(nodesWithCommentData, edges);
+        const nodes = await runLayout(nodesWithCommentData, edges);
         usePersistedStore.setState({ nodes, edges });
         setNodes(nodes);
         setEdges(edges);

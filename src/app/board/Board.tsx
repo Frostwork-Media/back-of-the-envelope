@@ -20,7 +20,6 @@ const nodeTypes: NodeTypes = {
 function BoardInner() {
   const nodes = usePersistedStore((state) => state.nodes);
   const edges = usePersistedStore((state) => state.edges);
-  const code = usePersistedStore((state) => state.code);
 
   return (
     <div className="grid h-screen">
@@ -48,7 +47,7 @@ function BoardInner() {
         //   }
         // }}
       >
-        <Background size={1} gap={12} color="#e0e0e0" />
+        <Background size={1} gap={12} color="#55515f" />
         <Panel
           position="top-right"
           className="grid w-full max-w-lg overflow-hidden rounded-lg border border-neutral-300 bg-white shadow-xl"
