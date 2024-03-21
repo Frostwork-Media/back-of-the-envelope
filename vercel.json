@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/api/trpc/:path*",
-      "destination": "/api/trpc"
-    }
-  ]
-}

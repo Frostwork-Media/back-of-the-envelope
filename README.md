@@ -1,14 +1,9 @@
-
-- ~~basically need decent prompt results~~
-- ~~I can write a parser which turns the current thing into a graph~~
-- ~~run the javascript with the current values~~
-- ~~lay things out with dagre~~
-- including updating existing code in prompt
-- would want to switch to next js and streaming, maybe t3 app
+- Figure out why it's unmounting and remounting when a node completes
 - Add voice chat so that it can be used more or less on the go
 - maybe move it into a realtime situation
 - a nicer slider
-
+- including updating existing code in prompt
+- what if you rotated each element a tiny bit for a cute effect
 
 
 - How are we testing a particular instance of our final distribution, like inputs to our function. There has to be a way. That's more or less the missing piece.
@@ -17,4 +12,11 @@
 
 And this is "The right version of estimaker" imo
 
-Assuming people can just edit the squiggle.
+Assuming people can just edit the code.
+
+===
+
+## Examples
+
+- "Estimate the daily revenue based on foot traffic and advertising effectiveness"
+- "Estimate the number of people who will attend a concert based on ticket sales and social media mentions"
