@@ -1,4 +1,4 @@
-- dark mode
+- toggle the code
 - make it so that we auto zoom only when number of nodes changes, with delay, and it should run the graph layout algorithm, and then fitZoom...
 - Add voice chat so that it can be used more or less on the go
 - do a proper ux, again with on the go in mind, code overlay i think

@@ -24,25 +24,39 @@ export const Editor = memo(function Editor() {
 
   return (
     <MonacoEditor
-      height="400px"
+      height="100%"
       language="javascript"
-      theme="vs-dark"
+      theme="my-theme"
       defaultValue={code}
       onChange={(value) => {
         setJs(value ?? "", false).catch(console.error);
       }}
-      onMount={(editor) => {
+      onMount={(editor, monaco) => {
         editorRef.current = editor;
+
+        monaco.editor.defineTheme("my-theme", {
+          base: "vs-dark",
+          inherit: true,
+          rules: [],
+          colors: {
+            "editor.background": "#ffffff00",
+          },
+        });
+
+        // set theme
+        monaco.editor.setTheme("my-theme");
       }}
       options={{
         minimap: { enabled: false },
         scrollBeyondLastLine: false,
         automaticLayout: true,
-        lineDecorationsWidth: 10,
+        lineDecorationsWidth: 15,
         lineNumbers: "off",
-        padding: { top: 10, bottom: 10 },
+        padding: { top: 15, bottom: 15 },
         glyphMargin: false,
         folding: false,
+        fontSize: 16,
+        renderLineHighlight: "none",
       }}
     />
   );

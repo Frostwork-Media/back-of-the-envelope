@@ -1,22 +1,17 @@
 "use client";
 
-import { useReactFlow } from "@xyflow/react";
 import { useChat } from "ai/react";
+import { Microphone2, Send2 } from "iconsax-react";
 import { useEffect } from "react";
 import { fixToolCallJson } from "~/lib/fixToolCallJson";
 import { usePersistedStore, useSetJs } from "~/lib/usePersistedStore";
-import { FormatSquare } from "iconsax-react";
+import { NavIconButton } from "./NavIconButton";
 
 export function Chat() {
-  const { fitView } = useReactFlow();
   const js = usePersistedStore((state) => state.code);
   const setJs = useSetJs();
-  // const throttleSetJs = useCallback(throttle(setJs, 60), [setJs]);
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
-    useChat({
-      initialInput:
-        "Estimate the daily revenue based on foot traffic and advertising effectiveness",
-    });
+    useChat();
 
   let currentJs = js;
 
@@ -28,9 +23,6 @@ export function Chat() {
         case "string": {
           try {
             currentJs = fixToolCallJson(latestMessage.tool_calls);
-            // if (js) {
-            //   throttleSetJs(js);
-            // }
           } catch (e) {
             // console.error(e);
           }
@@ -48,11 +40,19 @@ export function Chat() {
   }, [currentJs, js, setJs]);
 
   return (
-    <form onSubmit={handleSubmit} className="grid">
-      <textarea
-        className="h-[140px] w-full resize-none p-2 outline-none"
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-grow items-center bg-transparent px-1"
+    >
+      <NavIconButton
+        icon={Microphone2}
+        hoverClass="hover:text-yellow-500"
+        type="button"
+      />
+      <input
+        className="w-full rounded-md bg-white/5 p-3 outline-none"
         value={input}
-        placeholder="Say something..."
+        placeholder="If I walk 5 miles a day, how far do I walk in a week?"
         onChange={handleInputChange}
         onKeyDown={(e) => {
           if (e.key === "Enter" && !e.shiftKey) {
@@ -66,16 +66,7 @@ export function Chat() {
           }
         }}
       />
+      <NavIconButton type="submit" icon={Send2} hoverClass="hover:text-brand" />
     </form>
   );
 }
-
-// function throttle<T extends (...args: any[]) => any>(fn: T, wait: number): T {
-//   let time = Date.now();
-//   return function (this: any, ...args: any[]) {
-//     if (time + wait - Date.now() < 0) {
-//       fn.apply(this, args);
-//       time = Date.now();
-//     }
-//   } as T;
-// }
