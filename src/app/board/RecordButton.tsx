@@ -66,7 +66,7 @@ export function RecordButton({
   }, [hasAccess, submitRecording, transcribe]);
 
   // handle mouse down
-  const handleMouseDown = useCallback(() => {
+  const handlePointerDown = useCallback(() => {
     // If access unknown, do nothing
     if (hasAccess === null) {
       requestMicrophoneAccess()
@@ -93,7 +93,7 @@ export function RecordButton({
     }
   }, [hasAccess, recording]);
 
-  const handleMouseUp = useCallback(() => {
+  const handlePointerUp = useCallback(() => {
     if (!recording) return;
     setRecording(false);
     mediaRecorder.current?.stop();
@@ -111,8 +111,8 @@ export function RecordButton({
           hasAccess === true && !recording,
         "bg-red-500/30 !text-red-500 transition-none": recording,
       })}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
     />
   );
 }
