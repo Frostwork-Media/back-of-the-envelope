@@ -38,7 +38,7 @@ export function mergeCommentData(
 ): Node[] {
   const mergedGraph = graph;
   const nodes: Node[] = mergedGraph.nodes.map((node) => {
-    const commentData = comments[node.lineNumber - 1] || {};
+    const commentData = comments[node.lineNumber - 1] ?? {};
 
     return {
       id: node.varName,
@@ -47,7 +47,7 @@ export function mergeCommentData(
       data: {
         lineNumber: node.lineNumber,
         ...commentData,
-        label: commentData["title"] ?? node.varName,
+        label: commentData.title ?? node.varName,
       },
     };
   });
