@@ -48,7 +48,7 @@ export function RecordButton({
             });
 
             // if blob is too short, alert user to press and hold
-            if (blob.size < 500) {
+            if (blob.size < 600) {
               window.alert("Please press and hold to record");
               return;
             }

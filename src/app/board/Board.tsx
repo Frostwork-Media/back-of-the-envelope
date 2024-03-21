@@ -56,7 +56,7 @@ function BoardInner() {
         />
         <Panel
           position="top-center"
-          className="!mx-0 !my-2 grid w-full max-w-sm overflow-hidden rounded-full border border-neutral-700 bg-neutral-900 shadow shadow-[black] md:max-w-lg"
+          className="!mx-0 !my-2 grid w-full max-w-sm select-none overflow-hidden rounded-full border border-neutral-700 bg-neutral-900 shadow shadow-[black] md:max-w-lg"
         >
           <div className="flex items-center">
             <Chat />
