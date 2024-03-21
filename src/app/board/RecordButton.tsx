@@ -66,38 +66,50 @@ export function RecordButton({
   }, [hasAccess, submitRecording, transcribe]);
 
   // handle mouse down
-  const handlePointerDown = useCallback(() => {
-    // If access unknown, do nothing
-    if (hasAccess === null) {
-      requestMicrophoneAccess()
-        .then(() => {
-          setHasAccess(true);
-        })
-        .catch(() => {
-          setHasAccess(false);
-        });
-      return;
-    } else if (hasAccess === false) {
-      window.alert(
-        "Microphone access disabled. Please enable it in your browser settings.",
-      );
-      return;
-    } else {
-      if (recording) return;
+  const handlePointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
 
-      // Clear Data
-      streamData.current = [];
+      // If access unknown, do nothing
+      if (hasAccess === null) {
+        requestMicrophoneAccess()
+          .then(() => {
+            setHasAccess(true);
+          })
+          .catch(() => {
+            setHasAccess(false);
+          });
+        return;
+      } else if (hasAccess === false) {
+        window.alert(
+          "Microphone access disabled. Please enable it in your browser settings.",
+        );
+        return;
+      } else {
+        if (recording) return;
 
-      setRecording(true);
-      mediaRecorder.current?.start();
-    }
-  }, [hasAccess, recording]);
+        // Clear Data
+        streamData.current = [];
 
-  const handlePointerUp = useCallback(() => {
-    if (!recording) return;
-    setRecording(false);
-    mediaRecorder.current?.stop();
-  }, [recording]);
+        setRecording(true);
+        mediaRecorder.current?.start();
+      }
+    },
+    [hasAccess, recording],
+  );
+
+  const handlePointerUp = useCallback(
+    (e: React.PointerEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (!recording) return;
+      setRecording(false);
+      mediaRecorder.current?.stop();
+    },
+    [recording],
+  );
 
   return (
     <NavIconButton
