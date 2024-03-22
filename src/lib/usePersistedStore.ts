@@ -55,7 +55,7 @@ export function useSetJs() {
         setEdges(edges);
         if (shouldFitView && !isAnimating.current) {
           requestAnimationFrame(() => {
-            fitView({ duration: 300, maxZoom: 2 });
+            fitView({ duration: 300, maxZoom: 1.5 });
             isAnimating.current = true;
           });
           setTimeout(() => {
