@@ -1,13 +1,4 @@
-# TO DO
-- a nicer slider
-- make it so that we auto zoom only when number of nodes changes, with delay, and it should run the graph layout algorithm, and then fitZoom...
-  - use current screen aspect ratio when running layout
-- maybe move it into a realtime situation
-- eventually move ai stuff behind protected procedures
-- including updating existing code in prompt
-- experiment with adding array[] and rendering with line graph / bar graph
-- prefix/suffix for better display
-- is market lookup possible? what would it look like in code
+# Back of the Envelope
 
 ---
 
