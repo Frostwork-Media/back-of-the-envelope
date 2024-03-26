@@ -4,6 +4,7 @@ import {
   usePersistedStore,
   useSetVariableAtLineNumber,
 } from "~/lib/usePersistedStore";
+import { Slider } from "../_components/slider";
 
 export const CustomNode = memo(function CustomNode({
   data,
@@ -21,7 +22,7 @@ export const CustomNode = memo(function CustomNode({
         position={Position.Left}
         className="!-translate-y-1/2 !translate-x-0 opacity-0"
       />
-      <div className="from-brand-400 to-brand-500 grid w-[240px] overflow-hidden rounded-lg bg-gradient-to-r p-px text-white">
+      <div className="grid w-[240px] overflow-hidden rounded-lg bg-gradient-to-r from-brand-400 to-brand-500 p-px text-white">
         <div className="grid gap-4 rounded-t-lg bg-neutral-800 p-4 pt-3">
           <div className="grid gap-1">
             <h2 className="text-wrap-balance text-base leading-tight">
@@ -65,16 +66,17 @@ function HandleControl({
 
   if (controlType === "range") {
     return (
-      <input
+      <Slider
         className="nodrag"
-        type="range"
-        min={args[0]}
-        max={args[1]}
-        step={args[2]}
-        defaultValue={defaultValue}
-        onChange={(e) => {
-          setVariableAtLineNumber(varName, lineNumber, e.target.value);
+        defaultValue={[Number(defaultValue)]}
+        onValueChange={(value) => {
+          const v = value[0];
+          if (typeof v !== "number") return;
+          setVariableAtLineNumber(varName, lineNumber, v.toString());
         }}
+        min={Number(args[0])}
+        max={Number(args[1])}
+        step={Number(args[2])}
       />
     );
   }

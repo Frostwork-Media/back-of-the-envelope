@@ -19,6 +19,7 @@ const title = "Back of the Envelope";
 export const metadata: Metadata = {
   title,
   description,
+  metadataBase: new URL("https://backoftheenvelope.app"),
   keywords: [
     "back of the envelope",
     "math",
