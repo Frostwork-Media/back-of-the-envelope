@@ -132,7 +132,7 @@ export function Chat() {
           <input
             className="w-full rounded-md rounded-l-full bg-white/5 p-3 outline-none sm:rounded-l-md"
             value={input}
-            placeholder="Monthly mortgage on a 350,000 house?"
+            placeholder="Enter a question..."
             onChange={handleInputChange}
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey) {
