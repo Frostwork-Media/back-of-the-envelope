@@ -7,11 +7,14 @@ import {
   type NodeTypes,
   ReactFlowProvider,
   BackgroundVariant,
+  useReactFlow,
 } from "@xyflow/react";
 import { CustomNode } from "./CustomNode";
 import { Chat } from "./Chat";
 import { CodePanel } from "./CodePanel";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
+import { GRAPH_MAX_ZOOM, GRAPH_MIN_ZOOM } from "~/lib/constants";
 
 const nodeTypes: NodeTypes = {
   custom: CustomNode,
@@ -21,13 +24,31 @@ function BoardInner() {
   const nodes = usePersistedStore((state) => state.nodes);
   const edges = usePersistedStore((state) => state.edges);
 
+  const { fitView } = useReactFlow();
+  const fitTimer = useRef<Timer | null>(null);
+  useEffect(() => {
+    if (!fitView) return;
+
+    // check if the timer is already running
+    if (fitTimer.current) {
+      clearTimeout(fitTimer.current);
+    }
+
+    // start a new timer
+    fitTimer.current = setTimeout(() => {
+      fitView({ duration: 300, maxZoom: GRAPH_MAX_ZOOM });
+      fitTimer.current = null;
+    }, 300);
+  }, [fitView, nodes.length]);
+
   return (
     <div className="grid h-[100dvh]">
       <ReactFlow
         nodeTypes={nodeTypes}
         nodes={nodes}
         edges={edges}
-        maxZoom={1.5}
+        maxZoom={GRAPH_MAX_ZOOM}
+        minZoom={GRAPH_MIN_ZOOM}
         fitView
         // onNodesChange={(changes) => {
         //   for (const change of changes) {
@@ -48,9 +69,9 @@ function BoardInner() {
         // }}
       >
         <Background
-          size={1}
+          size={1.5}
           gap={16}
-          color="#74707c"
+          color="#583d85"
           variant={BackgroundVariant.Dots}
         />
 

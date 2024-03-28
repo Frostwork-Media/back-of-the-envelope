@@ -28,7 +28,7 @@
     "@xyflow/react": "next",
     "acorn": "^8.11.3",
     "acorn-walk": "^8.3.2",
-    "ai": "^3.0.13",
+    "ai": "latest",
     "clsx": "^2.1.0",
     "dagre": "^0.8.5",
     "formidable": "^3.5.1",

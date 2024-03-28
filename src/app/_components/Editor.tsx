@@ -12,7 +12,11 @@ export const Editor = memo(function Editor() {
       theme="my-theme"
       value={usePersistedStore.getState().code}
       onChange={(value) => {
-        setJs(value ?? "", false, false);
+        setJs({
+          newCode: value ?? "",
+          shouldWriteToEditor: false,
+          shouldGetValues: true,
+        });
       }}
       onMount={(editor, monaco) => {
         window._editor = editor;

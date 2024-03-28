@@ -4,11 +4,16 @@ import { useChat } from "ai/react";
 import { Send2 } from "iconsax-react";
 import { useCallback, useEffect } from "react";
 import { fixToolCallJson } from "~/lib/fixToolCallJson";
-import { usePersistedStore, useSetJs } from "~/lib/usePersistedStore";
+import {
+  initialPersistedStore,
+  usePersistedStore,
+  useSetJs,
+} from "~/lib/usePersistedStore";
 import { NavIconButton } from "./NavIconButton";
 import { RecordButton } from "./RecordButton";
 import { Panel } from "@xyflow/react";
 import { cn } from "~/lib/cn";
+import { useClientStore } from "~/lib/useClientStore";
 
 export function Chat() {
   const js = usePersistedStore((state) => state.code);
@@ -21,7 +26,20 @@ export function Chat() {
     isLoading,
     setMessages,
     reload,
-  } = useChat();
+  } = useChat({
+    onFinish() {
+      console.log("onFinish() ran.");
+
+      useClientStore.setState({ isTextStreaming: false });
+
+      const newCode = usePersistedStore.getState().code;
+      setJs({
+        newCode,
+        shouldGetValues: true,
+        isTextStreaming: false,
+      });
+    },
+  });
 
   let currentJs = js;
 
@@ -44,8 +62,11 @@ export function Chat() {
   }
 
   useEffect(() => {
-    if (currentJs !== js) {
-      setJs(currentJs, false, true);
+    if (Boolean(currentJs) && currentJs !== js) {
+      setJs({
+        newCode: currentJs,
+        shouldWriteToEditor: true,
+      });
     }
   }, [currentJs, js, setJs]);
 
@@ -75,7 +96,11 @@ export function Chat() {
     >
       <div className="flex items-center">
         <form
-          onSubmit={handleSubmit}
+          onSubmit={(e) => {
+            usePersistedStore.setState(initialPersistedStore, true);
+            useClientStore.setState({ isTextStreaming: true });
+            handleSubmit(e);
+          }}
           className="flex flex-grow gap-1 bg-transparent p-1"
         >
           <div className="hidden shrink-0 sm:block">
@@ -107,7 +132,7 @@ export function Chat() {
           <input
             className="w-full rounded-md rounded-l-full bg-white/5 p-3 outline-none sm:rounded-l-md"
             value={input}
-            placeholder="If I walk 5 miles a day, how far do I walk in a week?"
+            placeholder="Monthly mortgage on a 350,000 house?"
             onChange={handleInputChange}
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey) {

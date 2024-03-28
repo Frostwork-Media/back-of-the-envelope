@@ -18,78 +18,94 @@ type PersistedStore = {
   values: Record<string, number>;
 };
 
+export const initialPersistedStore = {
+  text: "",
+  code: "",
+  nodes: [],
+  edges: [],
+  values: {},
+};
+
 export const usePersistedStore = create<PersistedStore>()(
   subscribeWithSelector(
-    persist(
-      (_set) => ({
-        text: "",
-        code: "",
-        nodes: [],
-        edges: [],
-        values: {},
-      }),
-      {
-        name: "pgm-chat",
-      },
-    ),
+    persist((_set) => initialPersistedStore, {
+      name: "pgm-chat",
+    }),
   ),
 );
 
 export function useSetJs() {
-  const { setNodes, setEdges, fitView } = useReactFlow();
-  const isAnimating = useRef(false);
-
   return useCallback(
-    (newCode: string, shouldFitView = true, shouldWriteToEditor = true) => {
+    ({
+      newCode,
+      shouldWriteToEditor = true,
+      shouldGetValues = false,
+      isTextStreaming = false,
+    }: {
+      newCode: string;
+      /** Whether or not code should be written into the editor */
+      shouldWriteToEditor?: boolean;
+      /** Whether or not to run the worker task and compute values */
+      shouldGetValues?: boolean;
+      /** Whether the text is streaming in right now */
+      isTextStreaming?: boolean;
+    }) => {
+      // reset the graph
+      if (newCode === "") {
+        usePersistedStore.setState(
+          {
+            code: newCode,
+            nodes: [],
+            edges: [],
+            values: {},
+          },
+          true,
+        );
+        return;
+      }
+
       usePersistedStore.setState({ code: newCode });
+
       try {
         const graph = codeToGraph(newCode);
-        // if (!graph.nodes.length) return;
+        // If the code is not empty, but nodes aren't parsing, bail out
+        if (!graph.nodes.length) return;
 
         const comments = extractCommentData(newCode);
         const nodesWithCommentData = mergeCommentData(comments, graph);
         const edges = toGraphEdges(graph);
 
-        const nodes = runLayout(nodesWithCommentData, edges);
+        const nodes = runLayout(nodesWithCommentData, edges, isTextStreaming);
         usePersistedStore.setState({ nodes, edges });
-        setNodes(nodes);
-        setEdges(edges);
-        if (shouldFitView && !isAnimating.current) {
-          requestAnimationFrame(() => {
-            fitView({ duration: 300, maxZoom: 1.5 });
-            isAnimating.current = true;
-          });
-          setTimeout(() => {
-            isAnimating.current = false;
-          }, 301);
-        }
-
-        const returnStatement = `\nreturn { ${graph.nodes
-          .map((node) => node.varName)
-          .join(", ")} }`;
-        const codeWithRtn = newCode + returnStatement;
-
-        const task = new Task();
-        task
-          .exe(codeWithRtn)
-          .then((res) => {
-            usePersistedStore.setState({
-              values: res as Record<string, number>,
-            });
-            task.destroy();
-          })
-          .catch((e) => {
-            throw e;
-          });
 
         if (shouldWriteToEditor) {
           writeTextToEditor(newCode);
+        }
+
+        if (shouldGetValues) {
+          const returnStatement = `\nreturn { ${graph.nodes
+            .map((node) => node.varName)
+            .join(", ")} }`;
+          const codeWithRtn = newCode + returnStatement;
+
+          const task = new Task();
+          task
+            .exe(codeWithRtn)
+            .then((res) => {
+              usePersistedStore.setState({
+                values: res as Record<string, number>,
+              });
+              task.destroy();
+            })
+            .catch((e) => {
+              throw e;
+            });
         }
       } catch (err) {
         console.error(err);
       }
     },
-    [fitView, setEdges, setNodes],
+    [],
   );
 }
 
@@ -100,13 +116,17 @@ export function useSetVariableAtLineNumber() {
       const js = usePersistedStore.getState().code;
       const lines = js.split("\n");
       const newLine = `const ${varName} = ${value};`;
-      const newJs = lines
+      const newCode = lines
         .slice(0, lineNumber - 1)
         .concat(newLine)
         .concat(lines.slice(lineNumber))
         .join("\n");
 
-      setJs(newJs, false, true);
+      setJs({
+        newCode,
+        shouldWriteToEditor: true,
+        shouldGetValues: true,
+      });
     },
     [setJs],
   );

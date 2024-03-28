@@ -42,7 +42,8 @@ export async function POST(req: Request) {
         name: "describe_pgm",
       },
     },
-    model: "gpt-4",
+    // model: "gpt-4",
+    model: "gpt-4-turbo-preview",
     stream: true,
     messages: [
       {

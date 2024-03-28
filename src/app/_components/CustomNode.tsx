@@ -5,16 +5,12 @@ import {
   useSetVariableAtLineNumber,
 } from "~/lib/usePersistedStore";
 import { Slider } from "./slider";
+import type { AppNodeData } from "~/lib/types";
 
 export const CustomNode = memo(function CustomNode({
   data,
   id,
-}: NodeProps<{
-  label: string;
-  description: string;
-  lineNumber: number;
-  control?: string;
-}>) {
+}: NodeProps<AppNodeData>) {
   return (
     <>
       <Handle
@@ -22,8 +18,8 @@ export const CustomNode = memo(function CustomNode({
         position={Position.Left}
         className="!-translate-y-1/2 !translate-x-0 opacity-0"
       />
-      <div className="grid w-[240px] overflow-hidden rounded-lg bg-gradient-to-r from-brand-400 to-brand-500 p-px text-white">
-        <div className="grid gap-4 rounded-t-lg bg-neutral-800 p-4 pt-3">
+      <div className="grid w-[240px] overflow-hidden rounded-xl bg-gradient-to-r from-brand-400 to-brand-600 p-[1.5px] text-white">
+        <div className="grid gap-4 rounded-t-[11px] bg-neutral-800 p-4 pt-3">
           <div className="grid gap-1">
             <h2 className="text-wrap-balance text-base leading-tight">
               {data.label}
@@ -32,7 +28,7 @@ export const CustomNode = memo(function CustomNode({
               {data.description}
             </p>
           </div>
-          {data.control ? (
+          {data.control && !data.isTextStreaming ? (
             <HandleControl
               directive={data.control}
               lineNumber={data.lineNumber}
@@ -68,7 +64,9 @@ function HandleControl({
     return (
       <Slider
         className="nodrag"
-        value={[Number(defaultValue)]}
+        defaultValue={
+          typeof defaultValue === "number" ? [defaultValue] : undefined
+        }
         onValueChange={(value) => {
           const v = value[0];
           if (typeof v !== "number") return;
