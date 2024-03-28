@@ -6,7 +6,7 @@ import dagre from "dagre";
 /**
  * Given nodes and edges, uses dagre to determine the positions
  */
-export async function runLayout(nodes: Node[], edges: Edge[]): Promise<Node[]> {
+export function runLayout(nodes: Node[], edges: Edge[]): Node[] {
   const g = new dagre.graphlib.Graph();
   g.setGraph({ rankdir: "LR" });
   g.setDefaultEdgeLabel(() => ({}));

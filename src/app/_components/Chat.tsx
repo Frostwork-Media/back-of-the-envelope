@@ -45,7 +45,7 @@ export function Chat() {
 
   useEffect(() => {
     if (currentJs !== js) {
-      setJs(currentJs).catch(console.error);
+      setJs(currentJs, false, true);
     }
   }, [currentJs, js, setJs]);
 

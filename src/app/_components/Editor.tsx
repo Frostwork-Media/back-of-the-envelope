@@ -1,38 +1,21 @@
 import MonacoEditor from "@monaco-editor/react";
-import type { OnMount } from "@monaco-editor/react";
-import { memo, useEffect, useRef } from "react";
+import { memo } from "react";
 import { usePersistedStore, useSetJs } from "~/lib/usePersistedStore";
 
 export const Editor = memo(function Editor() {
-  const code = usePersistedStore((state) => state.code);
   const setJs = useSetJs();
-
-  const editorRef = useRef<Parameters<OnMount>[0]>();
-
-  useEffect(() => {
-    const unsubscribe = usePersistedStore.subscribe(
-      (state) => state.code,
-      (code) => {
-        if (editorRef.current) {
-          editorRef.current.setValue(code);
-        }
-      },
-    );
-
-    return unsubscribe;
-  }, []);
 
   return (
     <MonacoEditor
       height="100%"
       language="javascript"
       theme="my-theme"
-      defaultValue={code}
+      value={usePersistedStore.getState().code}
       onChange={(value) => {
-        setJs(value ?? "", false).catch(console.error);
+        setJs(value ?? "", false, false);
       }}
       onMount={(editor, monaco) => {
-        editorRef.current = editor;
+        window._editor = editor;
 
         monaco.editor.defineTheme("my-theme", {
           base: "vs-dark",

@@ -8,6 +8,7 @@ import { extractCommentData, mergeCommentData } from "./comments";
 import { runLayout } from "./runLayout";
 import Task from "./Task";
 import { toGraphEdges } from "./toGraphEdges";
+import { writeTextToEditor } from "./editor";
 
 type PersistedStore = {
   text: string;
@@ -39,17 +40,17 @@ export function useSetJs() {
   const isAnimating = useRef(false);
 
   return useCallback(
-    async (newCode: string, shouldFitView = true) => {
+    (newCode: string, shouldFitView = true, shouldWriteToEditor = true) => {
       usePersistedStore.setState({ code: newCode });
       try {
         const graph = codeToGraph(newCode);
-        if (!graph.nodes.length) return;
+        // if (!graph.nodes.length) return;
 
         const comments = extractCommentData(newCode);
         const nodesWithCommentData = mergeCommentData(comments, graph);
         const edges = toGraphEdges(graph);
 
-        const nodes = await runLayout(nodesWithCommentData, edges);
+        const nodes = runLayout(nodesWithCommentData, edges);
         usePersistedStore.setState({ nodes, edges });
         setNodes(nodes);
         setEdges(edges);
@@ -80,6 +81,10 @@ export function useSetJs() {
           .catch((e) => {
             throw e;
           });
+
+        if (shouldWriteToEditor) {
+          writeTextToEditor(newCode);
+        }
       } catch (err) {
         console.error(err);
       }
@@ -101,9 +106,7 @@ export function useSetVariableAtLineNumber() {
         .concat(lines.slice(lineNumber))
         .join("\n");
 
-      setJs(newJs, false).catch((e) => {
-        console.error(e);
-      });
+      setJs(newJs, false, true);
     },
     [setJs],
   );

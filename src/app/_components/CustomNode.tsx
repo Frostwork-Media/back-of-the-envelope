@@ -4,7 +4,7 @@ import {
   usePersistedStore,
   useSetVariableAtLineNumber,
 } from "~/lib/usePersistedStore";
-import { Slider } from "../_components/slider";
+import { Slider } from "./slider";
 
 export const CustomNode = memo(function CustomNode({
   data,
@@ -68,7 +68,7 @@ function HandleControl({
     return (
       <Slider
         className="nodrag"
-        defaultValue={[Number(defaultValue)]}
+        value={[Number(defaultValue)]}
         onValueChange={(value) => {
           const v = value[0];
           if (typeof v !== "number") return;

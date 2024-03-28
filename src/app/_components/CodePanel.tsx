@@ -1,8 +1,9 @@
 import { ArrowUp2, Code1 } from "iconsax-react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { Editor } from "./Editor";
+import { memo } from "react";
 
-export function CodePanel() {
+export const CodePanel = memo(function CodePanel() {
   return (
     <div className="bg-red pointer-events-none absolute bottom-0 left-0 right-0 top-0">
       <PanelGroup direction="vertical">
@@ -25,4 +26,4 @@ export function CodePanel() {
       </PanelGroup>
     </div>
   );
-}
+});
