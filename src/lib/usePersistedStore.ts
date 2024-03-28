@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import { persist, subscribeWithSelector } from "zustand/middleware";
 import type { Node, Edge } from "@xyflow/react";
-import { useReactFlow } from "@xyflow/react";
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
 import { codeToGraph } from "./codeToGraph";
 import { extractCommentData, mergeCommentData } from "./comments";
 import { runLayout } from "./runLayout";
