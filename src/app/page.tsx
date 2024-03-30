@@ -1,5 +1,10 @@
 import { Board } from "./_components/Board";
+import { Posthog } from "./_components/Posthog";
 
 export default function Page() {
-  return <Board />;
+  return (
+    <Posthog>
+      <Board />
+    </Posthog>
+  );
 }

@@ -64,9 +64,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
-        <Posthog>
-          <TRPCReactProvider>{children}</TRPCReactProvider>
-        </Posthog>
+        <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>
   );
