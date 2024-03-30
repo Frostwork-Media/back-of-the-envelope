@@ -6,6 +6,8 @@ import { TRPCReactProvider } from "~/trpc/react";
 
 import "@xyflow/react/dist/style.css";
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
+import { PHProvider } from "./_components/PHProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -55,6 +57,10 @@ export const metadata: Metadata = {
   },
 };
 
+const PostHogPageView = dynamic(() => import("./_components/PostHogPageView"), {
+  ssr: false,
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -62,9 +68,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
-      </body>
+      <PHProvider>
+        <body className={`font-sans ${inter.variable}`}>
+          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <PostHogPageView />
+        </body>
+      </PHProvider>
     </html>
   );
 }
