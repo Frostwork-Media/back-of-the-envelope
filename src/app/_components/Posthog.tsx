@@ -5,14 +5,14 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 const options = {
-  api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
+  api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
 };
 
 export function Posthog({ children }: { children: React.ReactNode }) {
-  if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
+  if (process.env.NEXT_VERCEL_ENV === "production") {
     return (
       <PostHogProvider
-        apiKey={process.env.REACT_APP_PUBLIC_POSTHOG_KEY}
+        apiKey={process.env.NEXT_PUBLIC_POSTHOG_KEY}
         options={options}
       >
         {children}
