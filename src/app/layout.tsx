@@ -6,7 +6,6 @@ import { TRPCReactProvider } from "~/trpc/react";
 
 import "@xyflow/react/dist/style.css";
 import type { Metadata } from "next";
-import { Posthog } from "./_components/Posthog";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -64,9 +63,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
-        <Posthog>
-          <TRPCReactProvider>{children}</TRPCReactProvider>
-        </Posthog>
+        <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>
   );

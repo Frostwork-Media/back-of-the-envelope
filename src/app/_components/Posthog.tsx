@@ -25,7 +25,6 @@ export function Posthog({ children }: { children: React.ReactNode }) {
 
 export function TrackPageViews() {
   const posthog = usePostHog();
-
   const location = usePathname();
 
   useEffect(() => {
