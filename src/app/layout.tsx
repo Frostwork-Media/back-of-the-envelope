@@ -6,7 +6,6 @@ import { TRPCReactProvider } from "~/trpc/react";
 
 import "@xyflow/react/dist/style.css";
 import type { Metadata } from "next";
-import { Posthog } from "./_components/Posthog";
 
 const inter = Inter({
   subsets: ["latin"],
